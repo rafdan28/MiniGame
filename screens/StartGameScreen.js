@@ -11,8 +11,16 @@ function StartGameScreen(){
                 autoCapitalize = "none" //permette che non venga scritto automaticamente in maiuscolo
                 autoCorrect = {false}
             />
-            <PrimaryButton>Reset</PrimaryButton>
-            <PrimaryButton>Conferma</PrimaryButton>
+            <View style = {styles.buttonsContainer}>
+                <View style = {styles.buttonContainer}>
+                    <PrimaryButton>Reset</PrimaryButton>
+                </View>
+
+                <View style = {styles.buttonContainer}>
+                    <PrimaryButton>Conferma</PrimaryButton>
+                </View>
+
+            </View>
         </View>
     );
 }
@@ -21,10 +29,12 @@ export default StartGameScreen;
 
 const styles = StyleSheet.create({
     inputContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
         marginTop: 100,
         marginHorizontal: 24,
         padding: 16,
-        backgroundColor: '#4e0329',
+        backgroundColor: '#3b021f',
         borderRadius: 8,
         elavation: 4,          //per l'ombra su android
         shadowColor: 'black',
@@ -45,4 +55,11 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
 
+    buttonsContainer: {
+      flexDirection: 'row',
+    },
+
+    buttonContainer: {
+        flex: 1,
+    },
 });
