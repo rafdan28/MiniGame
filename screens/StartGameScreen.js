@@ -1,7 +1,29 @@
-import {TextInput, View, StyleSheet} from "react-native";
+import {TextInput, View, StyleSheet, Alert} from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
+import {useState} from "react";
 
 function StartGameScreen(){
+    const [enteredNumber, setEnteredNumber] = useState('');
+
+    function numberInputHandler(enteredText){
+        setEnteredNumber(enteredText);
+    }
+
+    function resetInputHandler(){
+        setEnteredNumber('');
+    }
+
+    function confirmInputHandler(){
+        const chosenNumber = parseInt(enteredNumber);
+        if(isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99){
+            Alert.alert('Valore non corretto',
+                'Inserisci un numero tra 1 e 99',
+                [{text: 'OK', style: 'destructive', onPress: resetInputHandler}] )
+            return;
+        }
+        console.log('Valid Number: ' + enteredNumber);
+    }
+
     return(
         <View style = {styles.inputContainer}>
             <TextInput
@@ -10,14 +32,16 @@ function StartGameScreen(){
                 keyboardType = "number-pad"  //permette di poter scrivere solo numeri
                 autoCapitalize = "none" //permette che non venga scritto automaticamente in maiuscolo
                 autoCorrect = {false}
+                onChangeText = {numberInputHandler}
+                value = {enteredNumber}
             />
             <View style = {styles.buttonsContainer}>
                 <View style = {styles.buttonContainer}>
-                    <PrimaryButton>Reset</PrimaryButton>
+                    <PrimaryButton onPressButton={resetInputHandler}>Reset</PrimaryButton>
                 </View>
 
                 <View style = {styles.buttonContainer}>
-                    <PrimaryButton>Conferma</PrimaryButton>
+                    <PrimaryButton onPressButton={confirmInputHandler}>Conferma</PrimaryButton>
                 </View>
 
             </View>
