@@ -1,8 +1,10 @@
-import {Text, View, StyleSheet, Alert} from "react-native";
+import {View, StyleSheet, Alert} from "react-native";
 import Title from "../components/ui/Title";
 import {useEffect, useState} from "react";
 import NumberContainer from "../components/game/NumberContainer";
 import PrimaryButton from "../components/ui/PrimaryButton";
+import Card from "../components/ui/Card";
+import InstructionText from "../components/ui/InstructionText";
 
 function generateRandomBetwen(min, max, exclude){
     const rndNum = Math.floor(Math.random() * (max - min)) + min;
@@ -51,13 +53,17 @@ function GameScreen({userNumber, onGameOver}){
         <View style = {styles.screen}>
             <Title style = {styles.title}>Opponent's Guess</Title>
             <NumberContainer>{currentGuess}</NumberContainer>
-            <View>
-                <Text> Higher or lower?</Text>
-                <View>
-                    <PrimaryButton onPressButton = {nextGuessHandler.bind(this, 'lower')}>-</PrimaryButton>
-                    <PrimaryButton onPressButton = {nextGuessHandler.bind(this, 'greater')}>+</PrimaryButton>
+            <Card>
+                <InstructionText mystyle = {styles.instructionText}> Higher or lower?</InstructionText>
+                <View style = {styles.buttonsContainer}>
+                    <View style = {styles.buttonContainer}>
+                        <PrimaryButton onPressButton = {nextGuessHandler.bind(this, 'lower')}>-</PrimaryButton>
+                    </View>
+                    <View style = {styles.buttonContainer}>
+                        <PrimaryButton onPressButton = {nextGuessHandler.bind(this, 'greater')}>+</PrimaryButton>
+                    </View>
                 </View>
-            </View>
+            </Card>
             <View>
                 {/*LOG ROUNDS*/}
             </View>
@@ -71,5 +77,17 @@ const styles = StyleSheet.create({
     screen: {
         flex: 1,
         padding: 24,
+    },
+
+    instructionText: {
+        marginBottom: 12,
+    },
+
+    buttonsContainer: {
+        flexDirection: 'row',
+    },
+
+    buttonContainer: {
+        flex: 1,
     },
 });
