@@ -1,5 +1,5 @@
 import {TextInput, View, StyleSheet, Alert} from "react-native";
-import PrimaryButton from "../components/PrimaryButton";
+import PrimaryButton from "../components/ui/PrimaryButton";
 import Colors from "../constants/colors";
 import {useState} from "react";
 
@@ -19,7 +19,7 @@ function StartGameScreen({onPickNumber}){
         if(isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99){
             Alert.alert('Valore non corretto',
                 'Inserisci un numero tra 1 e 99',
-                [{text: 'OK', style: 'destructive', onPress: resetInputHandler}] )
+                [{text: 'OK', style: 'destructive', onPress: resetInputHandler}])
             return;
         }
         console.log('Valid Number: ' + chosenNumber);
